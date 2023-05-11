@@ -8,27 +8,27 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.b01.dto.BoardDTO;
-import org.zerock.b01.dto.BoardListBoardReplyCountDTO;
+import org.zerock.b01.dto.NewsDTO;
+import org.zerock.b01.dto.NewsListNewsReplyCountDTO;
 import org.zerock.b01.dto.PageRequestDTO;
 import org.zerock.b01.dto.PageResponseDTO;
-import org.zerock.b01.service.BoardService;
+import org.zerock.b01.service.NewsService;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/news")
 @Log4j2
 @RequiredArgsConstructor
-public class BoardController {
+public class NewsController {
 
-    private final BoardService boardService;
+    private final NewsService newsService;
 
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
 
-//        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
-        PageResponseDTO<BoardListBoardReplyCountDTO> responseDTO = boardService.listWithBoardReplyCount(pageRequestDTO);
+//        PageResponseDTO<NewsDTO> responseDTO = newsService.list(pageRequestDTO);
+        PageResponseDTO<NewsListNewsReplyCountDTO> responseDTO = newsService.listWithNewsReplyCount(pageRequestDTO);
 
         log.info(responseDTO);
 
@@ -42,23 +42,23 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerPost(@Valid NewsDTO newsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
-        log.info("board POST register.......");
+        log.info("news POST register.......");
 
         if(bindingResult.hasErrors()) {
             log.info("has errors.......");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
-            return "redirect:/board/register";
+            return "redirect:/news/register";
         }
 
-        log.info(boardDTO);
+        log.info(newsDTO);
 
-        Long bno = boardService.register(boardDTO);
+        Long bno = newsService.register(newsDTO);
 
         redirectAttributes.addFlashAttribute("result", bno);
 
-        return "redirect:/board/list";
+        return "redirect:/news/list";
     }
 
 
@@ -66,23 +66,23 @@ public class BoardController {
     public void read(Long bno, PageRequestDTO pageRequestDTO, Model model){
 
 
-        log.info("board read or modify get.......");
+        log.info("news read or modify get.......");
 
-        BoardDTO boardDTO = boardService.readOne(bno);
+        NewsDTO newsDTO = newsService.readOne(bno);
 
-        log.info(boardDTO);
+        log.info(newsDTO);
 
-        model.addAttribute("dto", boardDTO);
+        model.addAttribute("dto", newsDTO);
 
     }
 
     @PostMapping("/modify")
     public String modify( PageRequestDTO pageRequestDTO,
-                          @Valid BoardDTO boardDTO,
+                          @Valid NewsDTO newsDTO,
                           BindingResult bindingResult,
                           RedirectAttributes redirectAttributes){
 
-        log.info("board modify post......." + boardDTO);
+        log.info("news modify post......." + newsDTO);
 
         if(bindingResult.hasErrors()) {
             log.info("has errors.......");
@@ -91,28 +91,28 @@ public class BoardController {
 
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
 
-            redirectAttributes.addAttribute("bno", boardDTO.getBno());
+            redirectAttributes.addAttribute("bno", newsDTO.getBno());
 
-            return "redirect:/board/modify?"+link;
+            return "redirect:/news/modify?"+link;
         }
 
-        int loginValue = boardService.modify(boardDTO);
+        int loginValue = newsService.modify(newsDTO);
 
         if(loginValue == 1){
             log.info("비밀번호가 다릅니다.");
 
             redirectAttributes.addFlashAttribute("login", "denied");
 
-            redirectAttributes.addAttribute("bno", boardDTO.getBno());
+            redirectAttributes.addAttribute("bno", newsDTO.getBno());
 
-            return "redirect:/board/modify";
+            return "redirect:/news/modify";
         }
 
         redirectAttributes.addFlashAttribute("result", "modified");
 
-        redirectAttributes.addAttribute("bno", boardDTO.getBno());
+        redirectAttributes.addAttribute("bno", newsDTO.getBno());
 
-        return "redirect:/board/read";
+        return "redirect:/news/read";
     }
 
 
@@ -121,11 +121,11 @@ public class BoardController {
 
         log.info("remove post.. " + bno);
 
-        boardService.remove(bno);
+        newsService.remove(bno);
 
         redirectAttributes.addFlashAttribute("result", "removed");
 
-        return "redirect:/board/list";
+        return "redirect:/news/list";
 
     }
 

@@ -13,20 +13,19 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDTO {
+public class CompanyDTO {
 
     private Long bno;
 
-    @NotEmpty(message = "제목을 적어주세요.")
+    @NotEmpty
+    @Size(min = 3, max = 100)
     private String title;
 
-    @NotEmpty(message = "내용을 적어주세요.")
+    @NotEmpty
     private String content;
 
-    @NotEmpty(message = "사용자ID는 필수항목입니다.")
+    @NotEmpty
     private String writer;
-
-    private String password;
 
     private LocalDateTime regDate;
 

@@ -6,7 +6,7 @@
 <div layout:fragment="content">
 
     <div class="row mt-3">
-        <form action="/board/list" method="get">
+        <form action="/news/list" method="get">
             <div class="col">
                 <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
                 <div class="input-group">
@@ -35,7 +35,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <b>📌 커뮤니티</b>
+                    <b>📰 뉴스 보기</b>
                 </div>
 
                 <div class="card-body" id="f1">
@@ -56,9 +56,9 @@
                         <tr th:each="dto:${responseDTO.dtoList}"  >
                             <th scope="row">[[${dto.bno}]]</th>
                             <td>
-                                <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|"> [[${dto.title}]] </a>
+                                <a th:href="|@{/news/read(bno =${dto.bno})}&${link}|"> [[${dto.title}]] </a>
                                 &nbsp
-                                <span class="badge badge-dark" style="background-color: #101214">[[${dto.boardReplyCount}]]</span>
+                                <span class="badge badge-dark" style="background-color: #101214">[[${dto.newsReplyCount}]]</span>
                             </td>
                             <td>[[${dto.writer}]]</td>
                             <td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+                    <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        self.location =`/board/register`
+        self.location =`/news/register`
 
     }, false)
 
@@ -151,7 +151,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        self.location ='/board/list'
+        self.location ='/news/list'
 
     },false)
 

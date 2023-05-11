@@ -15,7 +15,7 @@
                     게시글 수정
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/board/modify}" method="post" id="f1">
+                    <form th:action="@{/company/modify}" method="post" id="f1">
                         <div class="input-group mb-4">
                             <span class="input-group-text">게시글 번호</span>
                             <input type="text" class="form-control" th:value="${dto.bno}" name="bno" readonly>
@@ -27,10 +27,6 @@
                         <div class="input-group mb-4">
                             <span class="input-group-text">글쓴이</span>
                             <input type="text" class="form-control" th:value="${dto.writer}" name="writer" readonly>
-                        </div>
-                        <div class="input-group mb-4">
-                            <span class="input-group-text">비밀번호</span>
-                            <input type="password" class="form-control" name="password">
                         </div>
                         <div class="input-group mb-4">
                             <span class="input-group-text">내용</span>
@@ -64,44 +60,28 @@
 
 <script layout:fragment="script" th:inline="javascript">
 
+
     const errors = [[${errors}]]
-    const login = [[${login}]]
     console.log(errors)
 
     let errorMsg = ''
 
-    // if(errors){
-    //     for (let i = 0; i < errors.length; i++) {
-    //         errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
-    //     }
-    //     history.boardReplaceState({}, null, null)
-    //     alert(errorMsg)
-    // }
-
     if(errors){
         for (let i = 0; i < errors.length; i++) {
-            errorMsg += `${errors[i].defaultMessage} \n`
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
         }
+        history.replaceState({}, null, null)
         alert(errorMsg)
     }
-
-    let loginErrorMsg = '비밀번호가 다릅니다.'
-    if(login){
-        alert(loginErrorMsg)
-    }
-
 
     const link = [[${pageRequestDTO.getLink()}]]
     const formObj = document.querySelector("#f1")
 
-
     document.querySelector(".modBtn").addEventListener("click", function(e){
-
-        // modal.show()
         e.preventDefault()
         e.stopPropagation()
 
-        formObj.action = `/board/modify?${link}`
+        formObj.action = `/company/modify?${link}`
         formObj.method ='post'
         formObj.submit()
 
@@ -113,7 +93,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        formObj.action = `/board/remove`
+        formObj.action = `/company/remove`
         formObj.method ='post'
         formObj.submit()
     }, false)
@@ -123,11 +103,9 @@
         e.stopPropagation()
 
         formObj.reset()
-        self.location =`/board/list?${link}`
+        self.location =`/company/list?${link}`
 
     }, false)
-
-
 
 
 </script>

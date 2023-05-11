@@ -15,18 +15,14 @@
           게시글 쓰기
         </div>
         <div class="card-body">
-          <form action="/board/register" method="post">
+          <form action="/company/register" method="post">
             <div class="input-group mb-3">
               <span class="input-group-text">제목</span>
               <input type="text" name="title" class="form-control" placeholder="Title">
             </div>
             <div class="input-group mb-3">
-              <span class="input-group-text">아이디</span>
-              <input type="text" name="writer" class="form-control" placeholder="UserName">
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text">비밀번호</span>
-              <input type="password" name="password" class="form-control" placeholder="Password">
+              <span class="input-group-text">글쓴이</span>
+              <input type="text" name="writer" class="form-control" placeholder="Writer">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">내용</span>
@@ -56,7 +52,7 @@
 
   if(errors){
     for (let i = 0; i < errors.length; i++) {
-      errorMsg += `${errors[i].defaultMessage} \n`
+      errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
     }
     alert(errorMsg)
   }

@@ -6,7 +6,7 @@
 <div layout:fragment="content">
 
     <div class="row mt-3">
-        <form action="/board/list" method="get">
+        <form action="/company/list" method="get">
             <div class="col">
                 <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
                 <div class="input-group">
@@ -16,7 +16,7 @@
                             <option value="tc" th:selected="${pageRequestDTO.type =='tc'}">제목 내용</option>
                             <option value="t" th:selected="${pageRequestDTO.type =='t'}">제목</option>
                             <option value="c" th:selected="${pageRequestDTO.type =='c'}">내용</option>
-                            <option value="w" th:selected="${pageRequestDTO.type =='w'}">작성자</option>
+                            <option value="w" th:selected="${pageRequestDTO.type =='w'}">작성자</option>RequestDTO.type =='tcw'}">제목 내용 작성자</option>
                         </select>
                     </div>
                     <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
@@ -35,12 +35,12 @@
 
             <div class="card">
                 <div class="card-header">
-                    <b>📌 커뮤니티</b>
+                    <b>🏛 기업 보기</b>
                 </div>
 
                 <div class="card-body" id="f1">
                     <div class="float-end">
-                        <button type="button" class="btn btn-dark registerBtn">글쓰기</button>
+<!--                        <button type="button" class="btn btn-dark registerBtn">글쓰기</button>-->
                     </div>
                     <table class="table">
                         <thead>
@@ -53,12 +53,11 @@
                         </thead>
 
                         <tbody th:with="link = ${pageRequestDTO.getLink()}">
+
                         <tr th:each="dto:${responseDTO.dtoList}"  >
                             <th scope="row">[[${dto.bno}]]</th>
                             <td>
-                                <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|"> [[${dto.title}]] </a>
-                                &nbsp
-                                <span class="badge badge-dark" style="background-color: #101214">[[${dto.boardReplyCount}]]</span>
+                                <a th:href="|@{/company/read(bno =${dto.bno})}&${link}|"> [[${dto.title}]] </a>
                             </td>
                             <td>[[${dto.writer}]]</td>
                             <td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td>
@@ -122,7 +121,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        self.location =`/board/register`
+        self.location =`/company/register`
 
     }, false)
 
@@ -151,7 +150,7 @@
         e.preventDefault()
         e.stopPropagation()
 
-        self.location ='/board/list'
+        self.location ='/company/list'
 
     },false)
 
