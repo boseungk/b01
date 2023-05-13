@@ -68,7 +68,6 @@ public class BoardReplyServiceImpl implements BoardReplyService{
         boardReplyRepository.deleteById(rno);
 
     }
-
     @Override
     public PageResponseDTO<BoardReplyDTO> getListOfBoard(Long bno, PageRequestDTO pageRequestDTO) {
 
