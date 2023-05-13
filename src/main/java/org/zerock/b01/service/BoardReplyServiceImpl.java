@@ -87,4 +87,5 @@ public class BoardReplyServiceImpl implements BoardReplyService{
                 .total((int)result.getTotalElements())
                 .build();
     }
+
 }
