@@ -61,6 +61,7 @@ public class BoardReplyServiceImpl implements BoardReplyService{
         boardReplyRepository.save(boardReply);
 
     }
+
     @Override
     public void remove(Long rno) {
 
