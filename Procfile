@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar heroku-api/build/libs/heroku-api.jar
+web: java -jar ./build/libs/b01-0.0.1-SNAPSHOT.jar
