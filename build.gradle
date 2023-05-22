@@ -15,7 +15,7 @@ plugins {
 
 group = 'org.zerock'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -71,3 +71,8 @@ sourceSets{
 }
 
 compileJava.dependsOn('clean')
+
+jar {
+    baseName = 'heroku-api'
+    version = '0.0.1'
+}
