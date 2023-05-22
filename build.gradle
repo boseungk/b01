@@ -7,7 +7,6 @@ buildscript{
 plugins {
     id 'base'
     id 'java'
-    id 'war'
     id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 
@@ -28,7 +27,6 @@ repositories {
 }
 
 dependencies {
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -72,7 +70,16 @@ sourceSets{
 
 compileJava.dependsOn('clean')
 
+tasks.withType(Jar).all {
+    duplicatesStrategy 'exclude'
+}
+tasks.withType(Tar){
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Zip){
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 jar {
-    baseName = 'heroku-api'
-    version = '0.0.1'
+    enabled = false
 }
