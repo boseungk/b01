@@ -7,17 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>주식 정보 웹사이트</title>
+    <title>주식 웹사이트</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <style>
+        .card-cover {
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+        .company{
+            background-image: url('https://github.com/boseungk/board/assets/95980754/f2696fbd-b927-4d25-98b6-2c0b033df6fc');
+            cursor:pointer;
+        }
+        .news{
+            background-image: url('https://github.com/boseungk/board/assets/95980754/04adecc2-3ae7-40ea-bc4b-eef8fa48b54b');
+            cursor:pointer;
+        }
+        .board{
+            background-image: url('https://github.com/boseungk/board/assets/95980754/919d2f5e-0c38-4b5f-bb7b-b49261b751ab');
+            cursor:pointer;
+        }
+        .main{
+            cursor:pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="d-flex" id="wrapper">
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">메뉴</div>
+        <div class="sidebar-heading border-bottom bg-light main" onclick="location.href='/home/main';">Home</div>
         <div class="list-group list-group-flush">
 <!--            <a class="list-group-item list-group-item-action list-group-item-light p-6" href="/stock/list">📈 주가 보기</a>-->
 <!--            <a class="list-group-item list-group-item-action list-group-item-light p-6" href="/exchange/list">💵 환율 보기</a>-->

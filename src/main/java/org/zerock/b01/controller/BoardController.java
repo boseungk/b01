@@ -28,7 +28,8 @@ public class BoardController {
     public void list(PageRequestDTO pageRequestDTO, Model model){
 
 //        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
-        PageResponseDTO<BoardListBoardReplyCountDTO> responseDTO = boardService.listWithBoardReplyCount(pageRequestDTO);
+        PageResponseDTO<BoardListBoardReplyCountDTO> responseDTO =
+                boardService.listWithBoardReplyCount(pageRequestDTO);
 
         log.info(responseDTO);
 
